@@ -3,7 +3,29 @@ function addTodo(text) {
 
   const item = document.createElement("li");
   item.className = "todo-item";
-  item.textContent = text;
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.className = "todo-checkbox";
+  checkbox.addEventListener("change", () => {
+    item.classList.toggle("todo-item-completed", checkbox.checked);
+  });
+
+  const label = document.createElement("span");
+  label.className = "todo-text";
+  label.textContent = text;
+
+  const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
+  deleteButton.className = "todo-delete-button";
+  deleteButton.textContent = "削除";
+  deleteButton.addEventListener("click", () => {
+    item.remove();
+  });
+
+  item.appendChild(checkbox);
+  item.appendChild(label);
+  item.appendChild(deleteButton);
 
   list.appendChild(item);
 }
